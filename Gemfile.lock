@@ -33,9 +33,6 @@ GEM
       activemodel (= 5.2.3)
       activesupport (= 5.2.3)
       arel (>= 9.0)
-    activerecord-postgis-adapter (5.2.2)
-      activerecord (~> 5.1)
-      rgeo-activerecord (~> 6.0)
     activestorage (5.2.3)
       actionpack (= 5.2.3)
       activerecord (= 5.2.3)
@@ -231,10 +228,6 @@ GEM
       railties (>= 4.2.0, < 6.0)
     reverse_markdown (1.1.0)
       nokogiri
-    rgeo (2.0.1)
-    rgeo-activerecord (6.2.0)
-      activerecord (>= 5.0)
-      rgeo (>= 1.0.0)
     rubocop (0.70.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -313,7 +306,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-postgis-adapter
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   better_errors
