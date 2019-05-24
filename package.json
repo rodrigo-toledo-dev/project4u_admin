@@ -1,0 +1,7 @@
+{
+  "name": "project4u_admin",
+  "private": true,
+  "dependencies": {
+    "bulma-dashboard": "^0.1.40",
+  }
+}
