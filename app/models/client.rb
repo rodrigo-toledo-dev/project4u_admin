@@ -1,4 +1,4 @@
 class Client < ApplicationRecord
-  has_many :clients
+  has_many :users
   validates :name, presence: :true, uniqueness: true
 end
