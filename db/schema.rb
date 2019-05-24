@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_24_211622) do
+ActiveRecord::Schema.define(version: 2019_05_24_221052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,29 @@ ActiveRecord::Schema.define(version: 2019_05_24_211622) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name", default: "", null: false
+    t.integer "screen_of_records", default: 0, null: false
+    t.integer "screen_of_editions", default: 0, null: false
+    t.integer "screen_of_searchs", default: 0, null: false
+    t.integer "reports", default: 0, null: false
+    t.integer "print_of_documents", default: 0, null: false
+    t.integer "send_of_messages", default: 0, null: false
+    t.integer "automatic_routines", default: 0, null: false
+    t.integer "external_database_tables", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
+    t.string "auth_name", limit: 256
+    t.integer "auth_srid"
+    t.string "srtext", limit: 2048
+    t.string "proj4text", limit: 2048
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -52,6 +75,8 @@ ActiveRecord::Schema.define(version: 2019_05_24_211622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "client_id"
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
     t.index ["client_id"], name: "index_users_on_client_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

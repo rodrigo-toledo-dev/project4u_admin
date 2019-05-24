@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  screen_of_records: 1
+  screen_of_editions: 1
+  screen_of_searchs: 1
+  reports: 1
+  print_of_documents: 1
+  send_of_messages: 1
+  automatic_routines: 1
+  external_database_tables: 1
+
+two:
+  name: MyString
+  screen_of_records: 1
+  screen_of_editions: 1
+  screen_of_searchs: 1
+  reports: 1
+  print_of_documents: 1
+  send_of_messages: 1
+  automatic_routines: 1
+  external_database_tables: 1
