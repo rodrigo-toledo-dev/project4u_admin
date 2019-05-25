@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Admin</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    '/assets/rails_admin/rails_admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag '/assets/rails_admin/rails_admin', 'data-turbolinks-track': true %>
+  <%= action_cable_meta_tag %>
+</head>
+
+<body class="rails_admin">
+  <div class="wrapper">
+    <section id="main" class="container-fluid">
+      <div class="row text-center">
+        <section id="content-wrapper">
+          <div class="contain-inner dashboard-v3">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <%= render 'layouts/flash_messages' %>
+              <%= yield %>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
