@@ -76,12 +76,16 @@ module Project4uAdmin
         requires :client_name, type: String, desc: 'Client'
         requires :password, type: String, desc: 'Password'
         requires :password_confirmation, type: String, desc: 'Password confirmation'
-        requires :device_uuid, type: String
+        requires :uuid, type: String
+        requires :gcm_reg_id, type: String
       end
       post '/sign_up' do
-        email, password = params[:email], params[:password]
+        email, password, uuid = params[:email], params[:password], params[:uuid]
         user = User.find_by_email(email.downcase)
-        user_already_registered! if user
+        if user
+          Device.register(params, user)
+          user_already_registered!
+        end
 
         client = Client.find_by_name(params[:client_name])
         not_found! unless client
@@ -95,11 +99,7 @@ module Project4uAdmin
         )
         user_missing_params!(user.errors.full_messages.to_sentence) unless user.save
         user.ensure_authentication_token!
-        uuid = params[:device_uuid]
-        Device.find_or_initialize_by(uuid: uuid) do |device|
-          device.user = user
-          device.save(validate: false)
-        end
+        Device.register(params, user)
 
         { auth_token: user.authentication_token }
       end

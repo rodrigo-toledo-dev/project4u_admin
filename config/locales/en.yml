@@ -145,14 +145,27 @@ en:
       project:
         one: Projeto
         other: Projetos
+      device:
+        one: Aparelho
+        other: Aparelhos
     attributes:
+      device:
+        user: Usuário
+        uuid: Sessões
+        gcm_reg_id: Registro do Aparelho
+        version: Versão do Aparelho
+        created_at: Criado em
+        updated_at: Atualizado em
       user:
+        client: Cliente
         first_name: 'Nome'
         last_name: 'Sobrenome'
         name: Nome completo
         email: Email
         password: Senha
         password_confirmation: Confirmação da senha
+        device: Aparelho
+        authentication_token: Sessão atual
         created_at: Criado em
         updated_at: Atualizado em
       client:
