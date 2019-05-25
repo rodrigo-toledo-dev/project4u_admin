@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  uuid: MyString
+  gcm_reg_id: MyString
+  version: MyString
+
+two:
+  user: two
+  uuid: MyString
+  gcm_reg_id: MyString
+  version: MyString
