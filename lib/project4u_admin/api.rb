@@ -80,15 +80,15 @@ module Project4uAdmin
         requires :gcm_reg_id, type: String
       end
       post '/sign_up' do
+        client = Client.find_by_name(params[:client_name])
+        not_found! unless client
+
         email, password, uuid = params[:email], params[:password], params[:uuid]
-        user = User.find_by_email(email.downcase)
+        user = User.find_by_email(email)
         if user
           Device.register(params, user)
           user_already_registered!
         end
-
-        client = Client.find_by_name(params[:client_name])
-        not_found! unless client
         
         user = client.users.build(
           first_name: params[:first_name],
@@ -106,24 +106,24 @@ module Project4uAdmin
 
       desc 'Sign in user returning a new auth token'
       params do
-        requires :email, type: String, desc: 'user name/email'
-        requires :password, type: String, desc: 'password'
-        requires :device_uuid, type: String
+        requires :email, type: String, desc: 'Email'
+        requires :password, type: String, desc: 'Password'
+        requires :uuid, type: String
+        requires :gcm_reg_id, type: String
       end
       post '/sign_in' do
+        client = Client.find_by_name(params[:client_name])
+        not_found! unless client
+
         email, password = params[:email], params[:password]
-        # user = User.find_by_email(email.downcase)
-        user = User.find_by_email(email.downcase)
+
+        user = client.users.find_by_email(email)
         wrong_email_and_or_password! if user.nil?
 
         user.ensure_authentication_token!
         wrong_email_and_or_password! if not user.valid_password?(password)
 
-        uuid = params[:device_uuid]
-        Device.find_or_initialize_by(uuid: uuid) do |device|
-          device.user = user
-          device.save(validate: false)
-        end
+        Device.register(params, user)
 
         { auth_token: user.authentication_token }
       end

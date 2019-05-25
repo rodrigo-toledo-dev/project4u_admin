@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :token_authenticatable
   belongs_to :client
   has_one :device
+  has_many :devices
   has_many :projects
   validates :first_name, :last_name, presence: true
 

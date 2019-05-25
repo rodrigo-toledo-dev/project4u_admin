@@ -19,7 +19,7 @@ class Device < ApplicationRecord
     uuid, gcm_reg_id, version = params[:uuid], params[:gcm_reg_id], params[:version]
     device = Device.where(uuid: uuid).first
     unless device
-      device = user.build_device
+      device = user.devices.build
       device.uuid = uuid
       device.gcm_reg_id = gcm_reg_id
       device.version = version
