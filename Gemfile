@@ -68,3 +68,7 @@ gem 'devise'
 gem 'devise-token_authenticatable'
 gem "aws-sdk-s3", require: false
 gem 'rails_admin', '~> 1.3'
+
+group :production do
+  gem 'web-console', '>= 3.3.0'
+end
