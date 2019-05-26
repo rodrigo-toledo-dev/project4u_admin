@@ -106,18 +106,19 @@ module Project4uAdmin
 
       desc 'Sign in user returning a new auth token'
       params do
-        requires :email, type: String, desc: 'Email'
-        requires :password, type: String, desc: 'Password'
-        requires :uuid, type: String
-        requires :gcm_reg_id, type: String
+        optional :email, type: String, desc: 'Email'
+        optional :password, type: String, desc: 'Password'
+        optional :uuid, type: String
+        optional :gcm_reg_id, type: String
+        optional :version, type: String
       end
       post '/sign_in' do
-        client = Client.find_by_name(params[:client_name])
-        not_found! unless client
+        logger.info params.inspect
 
         email, password = params[:email], params[:password]
+        
 
-        user = client.users.find_by_email(email)
+        user = User.find_by_email(email)
         wrong_email_and_or_password! if user.nil?
 
         user.ensure_authentication_token!

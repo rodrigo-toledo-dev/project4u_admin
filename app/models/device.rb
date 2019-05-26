@@ -15,8 +15,8 @@ class Device < ApplicationRecord
     "#{uuid} (versão: #{version || "desconhecida"})"
   end
 
-  def self.register(params, user)
-    uuid, gcm_reg_id, version = params[:uuid], params[:gcm_reg_id], params[:version]
+  def self.register(data, user)
+    uuid, gcm_reg_id, version = data[:uuid], data[:gcm_reg_id], data[:version]
     device = Device.where(uuid: uuid).first
     unless device
       device = user.devices.build

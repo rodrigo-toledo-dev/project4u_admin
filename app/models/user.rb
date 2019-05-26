@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   def name
-    [first_name.to_s, last_name.to_s].join(' ')
+    [first_name.to_s, last_name.to_s, "#{email.to_s}"].join(' ')
   end
 
   def api_attributes
