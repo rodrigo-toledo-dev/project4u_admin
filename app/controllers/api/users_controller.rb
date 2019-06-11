@@ -1,13 +1,13 @@
 class Api::UsersController < Api::ApplicationController
-  def create
-    client = Client.find_by_name(user_params[:client_name])
-    return head 404 if client.nil?
+  before_action :set_client
 
-    email, password, uuid = user_params[:email], user_params[:password], user_params[:uuid]
-    user = User.find_by_email(email)
+
+  def create
+
+    user = User.find_by_email(user_params[:email])
     return head 401 if user
     
-    user = client.users.build(
+    user = @client.users.build(
       first_name: user_params[:first_name],
       last_name: user_params[:last_name],
       email: user_params[:email],
@@ -41,5 +41,11 @@ class Api::UsersController < Api::ApplicationController
   protected
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :client_name, :password, :password_confirmation, :uuid, :gcm_reg_id, :version, :loading)
+    end
+
+    def set_client
+      @client ||= Client.find_by_name(user_params[:client_name])
+      return head 404 if @client.nil?
+      @client
     end
 end
