@@ -10,6 +10,6 @@ Rails.application.routes.draw do
         post :reset_password
       end
     end
-    post 'projects', to: 'projects#index'
+    resources :projects
   end
 end
