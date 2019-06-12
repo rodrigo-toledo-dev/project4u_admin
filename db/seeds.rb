@@ -1,3 +1,4 @@
+Device.destroy_all
 User.destroy_all
 Client.destroy_all
 Client.create!(name: 'Project4U')
