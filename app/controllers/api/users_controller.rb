@@ -1,6 +1,7 @@
 class Api::UsersController < Api::ApplicationController
   def create
     user = User.find_by_email(user_params[:email])
+    logger.info user.inspect
     return head 401 if user
     
     user = @client.users.build(
@@ -17,7 +18,7 @@ class Api::UsersController < Api::ApplicationController
     user.ensure_authentication_token!
     Device.register(user_params, user)
 
-    render json: { auth_token: user.authentication_token }
+    render json: { auth_token: user.authentication_token, client_name: @client.name, email: user.email }
   end
 
   def sign_in
@@ -30,6 +31,6 @@ class Api::UsersController < Api::ApplicationController
     user.ensure_authentication_token!
     Device.register(user_params, user)
 
-    render json: { auth_token: user.authentication_token }
+    render json: { auth_token: user.authentication_token, client_name: @client.name, email: user.email }
   end
 end
