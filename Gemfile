@@ -70,4 +70,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'devise-token_authenticatable'
 gem "aws-sdk-s3", require: false
-gem 'rails_admin', '~> 1.3'
+gem 'rails_admin', '~> 1.4'
